@@ -1,21 +1,19 @@
 public class Main {
     public static void main(String[] args) {
-        ToyStore store = new ToyStore();
-
+        // Инициализируем данные
+        String[] ids = {"1", "2", "3", "4"};
+        String[] names = {"Кукла", "Машинка", "Конструктор", "Пазл"};
+        int[] weights = {10, 20, 30, 40}; // Чем больше вес, тем выше вероятность выпадения
         
-        store.addToy(1, "Toy 1", 10, 20);
-        store.addToy(2, "Toy 2", 5, 10);
-        store.addToy(3, "Toy 3", 20, 70);
-
+        // Создаем систему розыгрыша
+        ToyRaffle raffle = new ToyRaffle(ids, names, weights);
         
-        store.setToyWeight(2, 30);
-
+        // Добавляем дополнительные игрушки при необходимости
+        raffle.addToy(new ToyRaffle.Toy("5", "Медвежонок", 15));
         
-        store.play();
-
-
-        try {
-            store.getPrizeToy();
-        }
+        // Проводим 10 розыгрышей и сохраняем результаты в файл
+        raffle.performDrawAndSaveResults("результаты_розыгрыша.txt", 10);
+        
+        System.out.println("Розыгрыш завершен. Результаты сохранены в файл 'результаты_розыгрыша.txt'");
     }
 }
